@@ -65,7 +65,15 @@ fun alignFile(inputName: String, lineLength: Int, outputName: String) {
  * Подчёркивание в середине и/или в конце строк значения не имеет.
  */
 fun deleteMarked(inputName: String, outputName: String) {
-    TODO()
+    val newFile = File(inputName).readLines()
+    val writer = File(outputName).bufferedWriter()
+    for (line in newFile) {
+        if (line.isEmpty() || line[0] != '_') {
+            writer.write(line)
+            writer.newLine()
+        }
+    }
+    writer.close()
 }
 
 /**
@@ -78,6 +86,7 @@ fun deleteMarked(inputName: String, outputName: String) {
  *
  */
 fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> {
+<<<<<<< .merge_file_a20504
     val file = File(inputName).readText().toLowerCase()
     val res = mutableMapOf<String, Int>()
     val list = file.split("\n")
@@ -87,14 +96,30 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
         for (j in list) {
             count += j.windowed(text.length) {
                 if (it == text)
+=======
+    val newFile = File(inputName).readText().lowercase()
+    val result = mutableMapOf<String, Int>()
+    val newFileInOneString = newFile.split("\n")
+    for (i in substrings) {
+        var counter = 0
+        for (j in newFileInOneString) {
+            counter += j.windowed(i.lowercase().length) {
+                if (it == i.lowercase())
+>>>>>>> .merge_file_a21272
                     1
                 else
                     0
             }.sum()
         }
+<<<<<<< .merge_file_a20504
         res[i] = count
     }
     return res
+=======
+        result[i] = counter
+    }
+    return result
+>>>>>>> .merge_file_a21272
 }
 
 /**
@@ -251,7 +276,17 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
  *
  * Обратите внимание: данная функция не имеет возвращаемого значения
  */
+fun checkingWordsForIdenticalLetters(word: String): Boolean {
+    val text = word.lowercase()
+    for (letter in text) {
+        if (text.count { c -> c == letter } > 1)
+            return false
+    }
+    return true
+}
+
 fun chooseLongestChaoticWord(inputName: String, outputName: String) {
+<<<<<<< .merge_file_a20504
     var maxlength = 0
     val res = StringBuilder()
     val out = File(outputName).bufferedWriter()
@@ -272,6 +307,20 @@ fun chooseLongestChaoticWord(inputName: String, outputName: String) {
     }
     out.write(res.toString())
     out.close()
+=======
+    val newFile = File(inputName).readLines()
+    var currentLength = 0
+    var listOfLongestWords = mutableListOf<String>()
+    for (line in newFile) {
+        if (line.length > currentLength && checkingWordsForIdenticalLetters(line)) {
+            currentLength = line.length
+            listOfLongestWords = mutableListOf(line)
+        } else if (line.length == currentLength && checkingWordsForIdenticalLetters(line)) {
+            listOfLongestWords.add(line)
+        }
+    }
+    File(outputName).writeText(listOfLongestWords.joinToString(separator = ", "))
+>>>>>>> .merge_file_a21272
 }
 
 /**
@@ -320,6 +369,7 @@ Suspendisse <s>et elit in enim tempus iaculis</s>.
  * (Отступы и переносы строк в примере добавлены для наглядности, при решении задачи их реализовывать не обязательно)
  */
 fun markdownToHtmlSimple(inputName: String, outputName: String) {
+<<<<<<< .merge_file_a20504
     val sign = listOf("*", "**", "~~")
     val input = File(inputName).readText()
     val file = input.replace(Regex("\\n"), "___-___")
@@ -353,6 +403,34 @@ fun markdownToHtmlSimple(inputName: String, outputName: String) {
         list1.removeLast()
     }
     File(outputName).writeText("<html><body>${list1.joinToString(separator = "\n")}</p></body></html>")
+=======
+    val newFile = File(inputName).readText()
+    var swapСharacters = Regex("\\*\\*([\\s\\S]*?)\\*\\*").replace(newFile) { swap ->
+        "<b>" + swap.value.replace("**", "") + "</b>"
+    }
+    swapСharacters = Regex("\\*([\\s\\S]*?)\\*").replace(swapСharacters) { swap ->
+        "<i>" + swap.value.replace("*", "") + "</i>"
+    }
+    swapСharacters = Regex("~~([\\s\\S]*?)~~").replace(swapСharacters) { swap ->
+        "<s>" + swap.value.replace("~~", "") + "</s>"
+    }
+    var counter = 0
+    val lines = swapСharacters.split("\n").toMutableList()
+    for (x in lines.indices) {
+        val line = lines[x]
+        if (line.trim().isEmpty()) {
+            if (counter > 0) {
+                if (x + 1 < lines.size && lines[x + 1].trim().isNotEmpty()) {
+                    lines[x] = "</p><p>"
+                    counter = 0
+                }
+            }
+        } else {
+            counter++
+        }
+    }
+    File(outputName).writeText("<html><body><p>${lines.joinToString(separator = "")}</p></body></html>")
+>>>>>>> .merge_file_a21272
 }
 
 /**

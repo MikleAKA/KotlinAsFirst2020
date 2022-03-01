@@ -2,6 +2,7 @@
 
 package lesson3.task1
 
+import kotlin.math.abs
 import kotlin.math.sqrt
 
 // Урок 3: циклы
@@ -72,7 +73,16 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun digitNumber(n: Int): Int = TODO()
+fun digitNumber(n: Int): Int {
+    if (abs(n) < 10) return 1
+    var module = abs(n)
+    var count = 0
+    while (module > 0) {
+        module /= 10
+        count += 1
+    }
+    return count
+}
 
 /**
  * Простая (2 балла)
@@ -81,6 +91,7 @@ fun digitNumber(n: Int): Int = TODO()
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
 fun fib(n: Int): Int {
+<<<<<<< .merge_file_a19836
     var a = 1
     var b = 1
     for (i in 3..n) {
@@ -88,6 +99,20 @@ fun fib(n: Int): Int {
         a = b - a
     }
     return b
+=======
+    var fibN = 0
+    if ((n == 1) || (n == 2)) return 1 else {
+        var fibFirst = 1
+        var fibSecond = 1
+        for (i in 3..n) {
+            fibN = fibFirst + fibSecond
+            fibFirst = fibSecond
+            fibSecond = fibN
+        }
+    }
+    return fibN
+
+>>>>>>> .merge_file_a13108
 }
 
 /**
@@ -164,7 +189,17 @@ fun isCoPrime(m: Int, n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var reversedN = 0
+    var m = n
+    while (m > 0) {
+        val digit = m % 10
+        reversedN *= 10
+        m /= 10
+        reversedN += digit
+    }
+    return reversedN
+}
 
 /**
  * Средняя (3 балла)
@@ -175,7 +210,10 @@ fun revert(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun isPalindrome(n: Int): Boolean = TODO()
+fun isPalindrome(n: Int): Boolean {
+    val palindrome = revert(n)
+    return palindrome == n
+}
 
 /**
  * Средняя (3 балла)
@@ -186,7 +224,6 @@ fun isPalindrome(n: Int): Boolean = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun hasDifferentDigits(n: Int): Boolean = TODO()
-
 /**
  * Средняя (4 балла)
  *
@@ -218,6 +255,7 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
+<<<<<<< .merge_file_a19836
 
 fun findN(number: Int, count2: Int, n: Int): Int {
     var copyn = number
@@ -244,6 +282,22 @@ fun squareSequenceDigit(n: Int): Int {
         }
     }
     return -1
+=======
+fun squareSequenceDigit(n: Int): Int {
+    var numberInSequence = 1
+    var sum = 0
+    var squareOfNumber = 0
+    while (sum < n) {
+        squareOfNumber = numberInSequence * numberInSequence
+        sum += digitNumber(squareOfNumber)
+        numberInSequence++
+    }
+    while (sum != n) {
+        squareOfNumber /= 10
+        sum--
+    }
+    return squareOfNumber % 10
+>>>>>>> .merge_file_a13108
 }
 
 /**
@@ -256,6 +310,7 @@ fun squareSequenceDigit(n: Int): Int {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun fibSequenceDigit(n: Int): Int {
+<<<<<<< .merge_file_a19836
     var a = 1
     var number = 1
     var count2 = 2
@@ -277,3 +332,18 @@ fun fibSequenceDigit(n: Int): Int {
     }
     return (-1)
 }
+=======
+    var numberInSequence = 0
+    var sum = 0
+    while (sum < n) {
+        numberInSequence++
+        sum += digitNumber(fib(numberInSequence))
+    }
+    numberInSequence = fib(numberInSequence)
+    while (sum > n) {
+        numberInSequence /= 10
+        sum--
+    }
+    return numberInSequence % 10
+}
+>>>>>>> .merge_file_a13108

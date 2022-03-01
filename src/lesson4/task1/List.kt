@@ -121,12 +121,17 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * по формуле abs = sqrt(a1^2 + a2^2 + ... + aN^2).
  * Модуль пустого вектора считать равным 0.0.
  */
+<<<<<<< .merge_file_a03476
 fun abs(v: List<Double>): Double {
     var sum = 0.0
     for (i in v.indices)
         sum += v[i] * v[i]
     return (sqrt(sum))
 }
+=======
+fun abs(v: List<Double>): Double =
+    sqrt(v.sumOf { it * it })
+>>>>>>> .merge_file_a08232
 
 /**
  * Простая (2 балла)
@@ -134,6 +139,7 @@ fun abs(v: List<Double>): Double {
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
 fun mean(list: List<Double>): Double {
+<<<<<<< .merge_file_a03476
     var sum = 0.0
     var k = 0.0
     for (element in list) {
@@ -145,6 +151,10 @@ fun mean(list: List<Double>): Double {
     } else {
         (sum / k)
     }
+=======
+    return if (list.isEmpty()) 0.0
+    else list.sum() / list.size
+>>>>>>> .merge_file_a08232
 }
 
 /**
@@ -155,7 +165,13 @@ fun mean(list: List<Double>): Double {
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun center(list: MutableList<Double>): MutableList<Double> = TODO()
+fun center(list: MutableList<Double>): MutableList<Double> {
+    val mean = mean(list)
+    for (i in 0 until list.size) {
+        list[i] -= mean
+    }
+    return list
+}
 
 /**
  * Средняя (3 балла)
@@ -164,7 +180,13 @@ fun center(list: MutableList<Double>): MutableList<Double> = TODO()
  * представленные в виде списков a и b. Скалярное произведение считать по формуле:
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.
  */
-fun times(a: List<Int>, b: List<Int>): Int = TODO()
+fun times(a: List<Int>, b: List<Int>): Int {
+    var c = 0
+    for (i in a.indices) {
+        c += a[i] * b[i]
+    }
+    return c
+}
 
 /**
  * Средняя (3 балла)
@@ -186,7 +208,12 @@ fun polynom(p: List<Int>, x: Int): Int = TODO()
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
+fun accumulate(list: MutableList<Int>): MutableList<Int> {
+    for (i in 1 until list.size) {
+        list[i] += list[i - 1]
+    }
+    return list
+}
 
 /**
  * Средняя (3 балла)
@@ -195,7 +222,18 @@ fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
  * Результат разложения вернуть в виде списка множителей, например 75 -> (3, 5, 5).
  * Множители в списке должны располагаться по возрастанию.
  */
-fun factorize(n: Int): List<Int> = TODO()
+fun factorize(n: Int): List<Int> {
+    var primeDivisor = 2
+    var m = n
+    val listOfPrimeDivisors = mutableListOf<Int>()
+    while (m > 1) {
+        if (m % primeDivisor == 0) {
+            m /= primeDivisor
+            listOfPrimeDivisors += primeDivisor
+        } else primeDivisor++
+    }
+    return listOfPrimeDivisors
+}
 
 /**
  * Сложная (4 балла)
@@ -204,7 +242,11 @@ fun factorize(n: Int): List<Int> = TODO()
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
+<<<<<<< .merge_file_a03476
 fun factorizeToString(n: Int): Nothing = TODO()
+=======
+fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*")
+>>>>>>> .merge_file_a08232
 
 /**
  * Средняя (3 балла)
@@ -268,6 +310,7 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
 fun roman(n: Int): String {
+<<<<<<< .merge_file_a03476
     var num = listOf(1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000)
     var rim = listOf("I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M")
     var k = n
@@ -281,6 +324,21 @@ fun roman(n: Int): String {
         i -= 1
     }
     return (res)
+=======
+    val naturalNumbers = listOf<Int>(1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000)
+    val romanNumbers = listOf<String>("I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M")
+    var i = 1
+    var result = ""
+    var m = n
+    while (m > 0) {
+        while (m - naturalNumbers[naturalNumbers.size - i] >= 0) {
+            result += romanNumbers[romanNumbers.size - i]
+            m -= naturalNumbers[naturalNumbers.size - i]
+        }
+        i++
+    }
+    return result
+>>>>>>> .merge_file_a08232
 }
 
 /**

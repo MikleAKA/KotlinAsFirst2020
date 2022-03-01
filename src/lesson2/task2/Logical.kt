@@ -18,7 +18,8 @@ fun pointInsideCircle(x: Double, y: Double, x0: Double, y0: Double, r: Double) =
  * Четырехзначное число назовем счастливым, если сумма первых двух ее цифр равна сумме двух последних.
  * Определить, счастливое ли заданное число, вернуть true, если это так.
  */
-fun isNumberHappy(number: Int): Boolean = TODO()
+fun isNumberHappy(number: Int): Boolean =
+    number / 1000 + (number / 100) % 10 == (number / 10) % 10 + number % 10
 
 /**
  * Простая (2 балла)
@@ -60,9 +61,19 @@ fun circleInside(
  * Вернуть true, если кирпич пройдёт
  */
 fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
+<<<<<<< .merge_file_a22912
     val max = maxOf(a, b, c)
     val min = minOf(a, b, c)
     val sr = a + b + c - max - min
     return (sr <= r && min <= s) || (sr <= s && min <= r)
 
 }
+=======
+    val minSide = minOf(a, b, c)
+    val maxSide = maxOf(a, b, c)
+    val avgSide = a + b + c - maxSide - minSide
+    val holeMinSide = minOf(r, s)
+    val holeMaxSide = maxOf(r, s)
+    return minSide <= holeMinSide && avgSide <= holeMaxSide
+}
+>>>>>>> .merge_file_a06476

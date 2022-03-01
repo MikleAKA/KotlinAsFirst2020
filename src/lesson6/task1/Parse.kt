@@ -174,7 +174,24 @@ fun firstDuplicateIndex(str: String): Int {
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть больше нуля либо равны нулю.
  */
-fun mostExpensive(description: String): String = TODO()
+fun mostExpensive(description: String): String {
+    val splitDescription = description.split("; ")
+    var theMostExpensiveTypeOfFood = ""
+    var costOfMostExpensive = 0.0
+    for (i in splitDescription) {
+        val splitFoodFromCost = i.split(" ")
+        if (splitFoodFromCost.size != 2) return ""
+        else {
+            val nameOfFood = splitFoodFromCost[0]
+            val costOfFood = splitFoodFromCost[1].toDouble()
+            if (costOfMostExpensive <= costOfFood) {
+                costOfMostExpensive = costOfFood
+                theMostExpensiveTypeOfFood = nameOfFood
+            }
+        }
+    }
+    return theMostExpensiveTypeOfFood
+}
 
 /**
  * Сложная (6 баллов)
@@ -189,6 +206,7 @@ fun mostExpensive(description: String): String = TODO()
  */
 fun fromRoman(roman: String): Int {
     if (roman == "") return -1
+<<<<<<< .merge_file_a04500
     var rom = roman
     val num = listOf(900, 1000, 400, 500, 90, 100, 40, 50, 9, 10, 4, 5, 1)
     val rim = listOf("CM", "M", "CD", "D", "XC", "C", "XL", "L", "IX", "X", "IV", "V", "I")
@@ -201,6 +219,21 @@ fun fromRoman(roman: String): Int {
     }
     if (rom != "") return -1
     return res
+=======
+    var secondRoman = roman
+    val naturalNumbers = listOf(900, 1000, 400, 500, 90, 100, 40, 50, 9, 10, 4, 5, 1)
+    val romanNumbers = listOf("CM", "M", "CD", "D", "XC", "C", "XL", "L", "IX", "X", "IV", "V", "I")
+    var result = 0
+    for (i in romanNumbers.indices) {
+        val element = romanNumbers[i]
+        while (element in secondRoman) {
+            secondRoman = secondRoman.replaceFirst(element, "")
+            result += naturalNumbers[i]
+        }
+    }
+    if (secondRoman != "") return -1
+    return result
+>>>>>>> .merge_file_a24392
 }
 
 /**

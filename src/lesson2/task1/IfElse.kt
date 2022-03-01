@@ -68,7 +68,13 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * Мой возраст. Для заданного 0 < n < 200, рассматриваемого как возраст человека,
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
-fun ageDescription(age: Int): String = TODO()
+fun ageDescription(age: Int): String = when {
+    age == 11 -> "$age лет"
+    age % 10 == 1 && age != 111 -> "$age год"
+    age % 10 in 2..4 && (age % 100 < 10 || age % 100 > 20) -> "$age года"
+    else -> "$age лет"
+}
+
 
 /**
  * Простая (2 балла)
@@ -134,6 +140,7 @@ fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int =
     when {
+<<<<<<< .merge_file_a07980
         c > b || d < a -> -1
         a in c..d && b in c..d -> b - a
         c in a..b && d in a..b -> d - c
@@ -141,3 +148,14 @@ fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int =
         a in c..d && b >= d -> d - a
         else -> -1
     }
+=======
+        c in a..b && b <= d -> b - c
+        a in c..b && b <= d -> b - a
+        c in a..d && d <= b -> d - c
+        a in c..d && d <= b -> d - a
+        b < c -> -1
+        d < a -> -1
+        else -> -1
+    }
+
+>>>>>>> .merge_file_a05184

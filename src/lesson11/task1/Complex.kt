@@ -5,6 +5,7 @@ package lesson11.task1
 /**
  * Фабричный метод для создания комплексного числа из строки вида x+yi
  */
+<<<<<<< .merge_file_a20200
 fun Complex(s: String): Complex {
     val reim = s.split('+', '-')
     val im = reim[1].dropLast(1).toDouble()
@@ -16,6 +17,9 @@ fun Complex(s: String): Complex {
     } else if ('-' in s) Complex(re, -im)
     else Complex(re, im)
 }
+=======
+fun Complex(s: String): Complex = TODO()
+>>>>>>> .merge_file_a21548
 
 /**
  * Класс "комплексное число".
@@ -31,7 +35,11 @@ class Complex(val re: Double, val im: Double) {
     /**
      * Конструктор из вещественного числа
      */
+<<<<<<< .merge_file_a20200
     constructor(x: Double) : this(x, 0.0)
+=======
+    constructor(x: Double) : this(TODO(), TODO())
+>>>>>>> .merge_file_a21548
 
     /**
      * Сложение.
